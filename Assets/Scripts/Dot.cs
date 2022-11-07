@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface Dot
 {
-    public void CreateDot(); 
+    public void CreateDot();
+    public void InteractDot(int v);
 }

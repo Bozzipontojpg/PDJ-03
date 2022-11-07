@@ -4,21 +4,48 @@ using UnityEngine;
 
 public class DotFactory : MonoBehaviour
 {
-    public List<GameObject> dotPrefabs;
+    public GameObject dotPrefab;
+    public List<DotData> dotDatas;
     public float spawnTime = 1f;
     public float spawnDelay = 5f;
-    public float spawnRange = 10f;
-    void Start()
+    public Transform[] spawnRange = new Transform[2];
+
+    public int enemySpawnChance = 10;
+
+    private Dot dot;
+
+    public void SpawnDot()
     {
         InvokeRepeating("Spawn", spawnTime, spawnDelay);
+    }
+    
+    public void DestroyDot()
+    {
+        CancelInvoke("Spawn");
+        foreach (Transform d in transform)
+        {
+            Destroy(d.gameObject);
+        }
     }
 
     public GameObject Spawn()
     {
-        int prefabIndex = Random.Range(0, dotPrefabs.Count);
-        GameObject prefab = dotPrefabs[prefabIndex];
+        Vector3 spawnPosition = new Vector3(Random.Range(spawnRange[0].position.x, spawnRange[1].position.x), 0, Random.Range(spawnRange[0].position.z, spawnRange[1].position.z));
 
-        Vector3 spawnPosition = new Vector3(Random.Range(-spawnRange, spawnRange), 0, Random.Range(-spawnRange, spawnRange));
-        return Instantiate(prefab, spawnPosition, Quaternion.identity);
+        int spawnChance = Random.Range(0, 100);
+
+        GameObject prefab = Instantiate(dotPrefab, spawnPosition, Quaternion.identity, this.transform);
+
+        if(spawnChance > enemySpawnChance)
+        {
+            dot = new NormalDot(prefab, dotDatas[Random.Range(0,2)]);
+        }
+        else
+        {
+            dot = new EnemyDot(prefab, dotDatas[2]);
+        }
+        dot.CreateDot();
+
+        return prefab;
     }
 }

@@ -16,6 +16,12 @@ public class NormalDot : Dot
     {
         dot.transform.localScale = new Vector3(data.size, data.size, data.size);
 
-        dot.GetComponent<Renderer>().material = data.mat;       
+        dot.GetComponent<Renderer>().material = data.mat;
+        dot.GetComponent<DotInfo>().SetDot(this, data.value);
+    }
+
+    public void InteractDot(int v)
+    {
+        GameManager.instance.AddPoints(v);
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc4d4a1fb2f75de42bb9a90d8bc9c146, type: 3}
   m_Name: DotHeavy
   m_EditorClassIdentifier: 
-  size: 1
-  value: 100
+  size: 0.9
+  value: -1
   mat: {fileID: 2100000, guid: b4f46c997587acd48b52c623839cedfc, type: 2}
