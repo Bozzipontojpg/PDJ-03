@@ -7,8 +7,6 @@ using UnityEngine;
 public class DotData : ScriptableObject
 {
     public float size;
-
     public int value;
-
     public Material mat;
 }
